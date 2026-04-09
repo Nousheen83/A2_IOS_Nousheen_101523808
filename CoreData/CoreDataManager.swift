@@ -1,5 +1,6 @@
-import UIKit
+import Foundation
 import CoreData
+import UIKit
 
 class CoreDataManager {
     
@@ -7,9 +8,9 @@ class CoreDataManager {
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "ProductModel")
-        container.loadPersistentStores { (_, error) in
+        container.loadPersistentStores { _, error in
             if let error = error {
-                fatalError("Core Data Failed: \(error)")
+                fatalError("Core Data Error: \(error)")
             }
         }
         return container
@@ -19,7 +20,7 @@ class CoreDataManager {
         return persistentContainer.viewContext
     }
     
-    func saveContext() {
+    func save() {
         if context.hasChanges {
             try? context.save()
         }
