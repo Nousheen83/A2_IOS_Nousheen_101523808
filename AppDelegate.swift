@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         insertDummyData()
         return true
     }
-
     // MARK: - Dummy Data (10 Products)
     func insertDummyData() {
         
