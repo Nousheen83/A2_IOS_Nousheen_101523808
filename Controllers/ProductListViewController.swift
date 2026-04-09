@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 class ProductListViewController: UITableViewController {
     
@@ -6,25 +7,26 @@ class ProductListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchProducts()
+        fetch()
     }
     
-    func fetchProducts() {
+    func fetch() {
         let request: NSFetchRequest<Product> = Product.fetchRequest()
         products = try! CoreDataManager.shared.context.fetch(request)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return products.count
+        products.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+    -> UITableViewCell {
         
-        let product = products[indexPath.row]
-        cell.textLabel?.text = product.name
-        cell.detailTextLabel?.text = product.desc
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        
+        let p = products[indexPath.row]
+        cell.textLabel?.text = p.name
+        cell.detailTextLabel?.text = p.desc
         
         return cell
     }
