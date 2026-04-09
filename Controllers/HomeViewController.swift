@@ -2,6 +2,7 @@ import UIKit
 import CoreData
 
 class HomeViewController: UIViewController {
+    
     var products: [Product] = []
     var index = 0
     
@@ -13,7 +14,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchProducts()
-        displayProduct()
+        display()
     }
     
     func fetchProducts() {
@@ -21,25 +22,27 @@ class HomeViewController: UIViewController {
         products = try! CoreDataManager.shared.context.fetch(request)
     }
     
-    func displayProduct() {
+    func display() {
         if products.count > 0 {
-            let product = products[index]
-            nameLabel.text = product.name
-            descLabel.text = product.desc
-            priceLabel.text = "$\(product.price)"
-            providerLabel.text = product.provider
+            let p = products[index]
+            nameLabel.text = p.name
+            descLabel.text = p.desc
+            priceLabel.text = "Price: \(p.price)"
+            providerLabel.text = p.provider
         }
     }
-    @IBAction func nextPressed(_ sender: UIButton) {
+    
+    @IBAction func nextTapped(_ sender: UIButton) {
         if index < products.count - 1 {
             index += 1
-            displayProduct()
+            display()
         }
-    }    
-    @IBAction func prevPressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func prevTapped(_ sender: UIButton) {
         if index > 0 {
             index -= 1
-            displayProduct()
+            display()
         }
     }
 }
