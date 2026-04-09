@@ -11,13 +11,11 @@ class AddProductViewController: UIViewController {
         
         let context = CoreDataManager.shared.context
         let product = Product(context: context)
-        
         product.productID = Int64(Date().timeIntervalSince1970)
         product.name = nameField.text
         product.desc = descField.text
         product.price = Double(priceField.text ?? "") ?? 0
         product.provider = providerField.text
-        
         CoreDataManager.shared.saveContext()
         navigationController?.popViewController(animated: true)
     }
