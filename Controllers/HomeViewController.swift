@@ -2,7 +2,6 @@ import UIKit
 import CoreData
 
 class HomeViewController: UIViewController {
-    
     var products: [Product] = []
     var index = 0
     
@@ -31,14 +30,12 @@ class HomeViewController: UIViewController {
             providerLabel.text = product.provider
         }
     }
-    
     @IBAction func nextPressed(_ sender: UIButton) {
         if index < products.count - 1 {
             index += 1
             displayProduct()
         }
-    }
-    
+    }    
     @IBAction func prevPressed(_ sender: UIButton) {
         if index > 0 {
             index -= 1
