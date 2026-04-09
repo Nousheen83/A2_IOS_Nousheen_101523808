@@ -7,16 +7,19 @@ class AddProductViewController: UIViewController {
     @IBOutlet weak var priceField: UITextField!
     @IBOutlet weak var providerField: UITextField!
     
-    @IBAction func saveProduct(_ sender: UIButton) {
+    @IBAction func saveTapped(_ sender: UIButton) {
         
         let context = CoreDataManager.shared.context
-        let product = Product(context: context)
-        product.productID = Int64(Date().timeIntervalSince1970)
-        product.name = nameField.text
-        product.desc = descField.text
-        product.price = Double(priceField.text ?? "") ?? 0
-        product.provider = providerField.text
-        CoreDataManager.shared.saveContext()
+        let p = Product(context: context)
+        
+        p.productID = Int64(Date().timeIntervalSince1970)
+        p.name = nameField.text
+        p.desc = descField.text
+        p.price = Double(priceField.text ?? "") ?? 0
+        p.provider = providerField.text
+        
+        CoreDataManager.shared.save()
+        
         navigationController?.popViewController(animated: true)
     }
 }
